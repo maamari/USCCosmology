@@ -26,9 +26,9 @@ D_H = 2997  # Mpc h^-1
 
 class Cosmos():
 
-    def __init__(self, z, kmin, kmax, N, Y200rhoc = 0.1,
-                 H0 = 67, Omegab0 = 0.02256/0.67**2, Omegam0 = (0.1142+0.02256)/0.67**2,
-                 ns = 0.971, Tcmb0 = 2.75, fnl = 5,
+    def __init__(self, z, kmin, kmax, N, Y200rhoc = 2e-3, sigma8 = 0.809, 
+                 wa = 0.01, w0 = -1.0, H0 = 67, ns = 0.971, Tcmb0 = 2.75, fnl = 5,
+                 Omegab0 = 0.02256/0.67**2, Omegam0 = (0.1142+0.02256)/0.67**2, OmegaLam = 0.73, 
                  Mlim = None, Ps = None):
 
         self.z = z
@@ -152,7 +152,8 @@ class Cosmos():
         """
         Y = self.Y200rhoc            # arcmin^2
         Y = np.deg2rad(Y/(60.)**2)    # arcmin to degree and degree to radian
-        self.Mlim = 1e14  #(self.DA()**2 * self.E()**(-2/3) * (Y/2.5e-4))**0.533 * 1e15   # M_solar
+        self.Mlim = 1e14  # 
+#         self.Mlim = (self.DA()**2 * self.E()**(-2/3) * (Y/2.5e-4))**0.533 * 1e15
 
 
     def D_plus(self, Om = 0.2815):
@@ -316,7 +317,8 @@ class Cosmos():
             return bL
 
         elif bScale == True:
-
+            
+            print("\t\t\t Linear bias =",bL + (bL - 1) * delta_crit * self.Delta_b_nL(M, k))
             return bL + (bL - 1) * delta_crit * self.Delta_b_nL(M, k)
 
 
@@ -399,7 +401,7 @@ class Cosmos():
 
             ERF = np.array([erfc(hp.xm(self.z, M_, self.Mlim, m)) - erfc(hp.xm(self.z, M_, self.Mlim, m + 1)) for M_ in self.Md()])
             bias = trapz(nM * bL * ERF, x = self.Md())/ trapz(nM * ERF, x = self.Md())
-
+            print("\t\t\t Bias =",bias)
             return bias
 
 
@@ -419,7 +421,7 @@ class Cosmos():
 
             bm = np.array([self.b_eff(m, k, bScale = bScale) for k in self.Ks() + 0.00001]) #np.linspace(1e-3, 0.1, 30)])
             bn = np.array([self.b_eff(n, k, bScale = bScale) for k in self.Ks() + 0.00001])
-
+            print("\t\t\t Ph_mn =",bm * bn * self.Ps)
             return bm * bn * self.Ps
 
 
@@ -468,7 +470,8 @@ class Cosmos():
             delta_nm = 1 if n == m else 0
             d1 = (nm * Pmm + 1) * (nn * Pnn + 1)
             d2 = nm * nn * (Pnm + delta_nm/nm)**2
-
+            
+            print("\t\t\t Veff =", n_/(d1 + d2))
             return n_/(d1 + d2)
 
 
@@ -491,3 +494,22 @@ class Cosmos():
         delta_nm = 1 if n == m else 0
 
         return 1/Nmod * ((Pmm + 1/nm) * (Pnn + 1/nm) + (Pmn + delta_nm/nm)**2)
+    
+    def dlnPhdp(self, m, n, c2, dp, bscale):
+        
+        """
+        The log derivative term needed in the Fisher
+        
+        """
+        print("bScale =",bscale)
+        return (np.log(self.Ph_mn(m,n,bScale=bscale))-np.log(c2.Ph_mn(m,n,bScale=bscale)))/(dp)
+
+    
+    def lambdaC0(self, k, M):
+        
+        """
+        Compton wavelength, Eq 27 in paper
+        
+        """
+        
+        return 32.53*np.sqrt(self.f_R_k(k,M)) # Mpc
