@@ -1,8 +1,8 @@
 """
 library containing differential equation solver for d=1 kernel elements
 """
-__author__ = " Siavash Yasini"
-__email__ = "yasini@usc.edu"
+__author__ = " Siavash Yasini, Karime Maamari"
+__email__ = "yasini@usc.edu, maamari@usc.edu"
 
 
 import os
