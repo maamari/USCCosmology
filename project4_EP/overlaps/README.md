@@ -1,6 +1,7 @@
 Requirements
 --------------
-streamlit, protobuf, numpy, healpy, matplotlib, pandas
+streamlit, protobuf, numpy, healpy, matplotlib, pandas<br>
+All can be installed with pip
 
 Using the tool
 --------------
