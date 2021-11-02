@@ -37,6 +37,7 @@ cluster_catalogs = sorted([
                     "WHL",
                     "DR9",
                     "PSZ2",
+                    "AdvACT",
                     ])
 
 def get_fsky(input_mask, threshold=0.1):
