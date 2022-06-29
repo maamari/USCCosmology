@@ -1,3 +1,5 @@
+**Based on project by syasini: https://github.com/syasini/cmb-x-galaxy-overlaps** 
+
 Requirements
 --------------
 streamlit, protobuf, numpy, healpy, matplotlib, pandas<br>
