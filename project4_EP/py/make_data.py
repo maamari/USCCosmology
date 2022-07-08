@@ -1,6 +1,7 @@
 '''
 Generates data for ML algo
 using pixell
+cluster works
 '''
 
 import multiprocessing as mp
