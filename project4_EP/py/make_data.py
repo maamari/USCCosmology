@@ -12,9 +12,8 @@ from pixell import enmap, reproject, utils
 
 
 voids = pd.read_csv('data/voids.csv', header=None)
-voids.columns = ['Sample', 'ID', 'RAdeg', 'DEdeg', 'z',
-                 'NGal', 'V', 'Reff', 'nmin', 'delmin', 'r',
-                 'P', 'Dbound']
+voids.columns = ['Sample', 'ID', 'RAdeg', 'DEdeg', 'z', 'NGal', 'V', 'Reff',
+'nmin', 'delmin', 'r', 'P', 'Dbound']
 
 pl = hp.read_map("data/HFI_SkyMap_353-psb-field-IQU_2048_R3.00_full.fits")
 pl[pl < -1e23] = 0
