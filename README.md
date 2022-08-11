@@ -12,5 +12,5 @@ Project 2:<br>
 Work done to enhance computational efficiency in the Lorentz boosting code, CosmoBoost (https://github.com/syasini/CosmoBoost). This involved exploring numerical instabilities, implementing a new analytic approach, and adding a new chunking approach to allowed large kernels to be passed into the ODE solver without requiring excessive amounts of RAM. 
 <br><br>
 Project 3:<br>
-In progress: Fisher matrix construction, likelihood analysis
+Inactive: Fisher matrix construction, likelihood analysis
 
