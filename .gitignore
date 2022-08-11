@@ -1,0 +1,6 @@
+*.csv
+*.fits
+*.dat
+*.txt
+*.npy
+*.tsv

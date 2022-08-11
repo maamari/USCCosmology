@@ -1,0 +1,16 @@
+#Atacama Cosmology Telescope (ACT) DR4 - Lensing Mask
+
+Lensing masks are provided in two regions of the sky:
+Deep56 (D56) and BOSS North (BN).
+
+Contents:
+
+* act_dr4.01_s14s15_[D56/BN]_lensing_mask.fits, patch = D56 for deep56, BN for BOSS North;
+
+The lensing maps have been divided by the mean of the square of the mask $w_2 = mean(mask**2)$.
+This number has to be multiplied back out if you want to use the local value of the lensing
+convergence in your analysis (e.g. when stacking). If you are doing a harmonic space analysis (e.g. a cross-spectrum),
+then the appropriate mask correction has to be applied. These corrections are described in the
+associated Jupyter notebook tutorials.
+
+Please see arxiv:2004.01139 for additional details and cite it  when using these maps. 
